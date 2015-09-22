@@ -32,8 +32,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve computes the inverse of the input matrix.
-## It returns the cached inverse if available.  If a
+## cacheSolve computes the inverse of the stored matrix.
+## The argument x is the list returned by makeCacheMatrix
+## when the matrix was first stored.
+## cacheSolve returns the cached inverse if available.  If a
 ## cached inverse is not available, it computes the
 ## inverse with an appropriate function call, then
 ## caches and returns the result.
@@ -50,7 +52,7 @@ cacheSolve <- function(x, ...) {
         if(xdim[1] == xdim[2]) {
                 i <- solve(data, ...)
         } else {
-                i <- pinv(data, ...)
+                i <- ginv(data, ...)
         }
         x$setinv(i)
         i
